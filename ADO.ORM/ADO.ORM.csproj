@@ -9,7 +9,7 @@
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageProjectUrl>https://github.com/wmer/ADO.ORM</PackageProjectUrl>
     <RepositoryUrl>https://github.com/wmer/ADO.ORM</RepositoryUrl>
-    <PackageTags>ORM MicroORM</PackageTags>
+    <PackageTags>ORM MicroORM Sqlite MySql SqlServer</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
