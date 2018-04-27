@@ -2,6 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>William Santana</Authors>
+    <Description>Simple Micro ORM for SQLite, MySql and SqlServer</Description>
+    <Copyright />
+    <PackageLicenseUrl>https://github.com/wmer/ADO.ORM/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageProjectUrl>https://github.com/wmer/ADO.ORM</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/wmer/ADO.ORM</RepositoryUrl>
+    <PackageTags>ORM MicroORM</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
