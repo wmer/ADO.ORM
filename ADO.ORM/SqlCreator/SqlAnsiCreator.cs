@@ -187,12 +187,12 @@ namespace ADO.ORM.SqlCreator {
                     foreach (var field in FieldsForFind<T>(properties).Split(',')) {
                         foreach (var sorted in sortedBy) {
                             if (countFields == countSorted) {
-                                fields += $"`{field}` {(((int)sorted == 0) ? "ASC" : "DESC")}, ";
+                                fields += $"'{field}' {(((int)sorted == 0) ? "ASC" : "DESC")}, ";
                             }
                             countSorted++;
                         }
                         if (countSorted == countFields) {
-                            fields += $"`{field}` ASC, ";
+                            fields += $"'{field}' ASC, ";
                         }
                         countSorted = 0;
                         countFields++;
@@ -255,7 +255,7 @@ namespace ADO.ORM.SqlCreator {
 
                     if (attributes.Length > 0) {
                         foreach (var attr in attributes) {
-                            if (attr is OnlyInModelAttribute) {
+                            if (attr is IgnoreAttribute) {
                                 notEnter = true;
                             }
                         }
@@ -302,7 +302,7 @@ namespace ADO.ORM.SqlCreator {
                                     notEnter = true;
                                     break;
                                 }
-                                if (attr is OnlyInModelAttribute) {
+                                if (attr is IgnoreAttribute) {
                                     notEnter = true;
                                 }
                             }
@@ -349,7 +349,7 @@ namespace ADO.ORM.SqlCreator {
 
                         if (attributes.Length > 0) {
                             foreach (var attr in attributes) {
-                                if (attr is OnlyInModelAttribute) {
+                                if (attr is IgnoreAttribute) {
                                     notEnter = true;
                                 }
                             }
@@ -408,7 +408,7 @@ namespace ADO.ORM.SqlCreator {
 
                         if (!notEnter) {
                             if (collumnType == "BLOB") {
-                                fields += $"`{collumnName}`=`{Convert.ToBase64String(collumnValue as byte[])}`, ";
+                                fields += $"'{collumnName}'='{Convert.ToBase64String(collumnValue as byte[])}', ";
                             } else if (collumnType == "BOOLEAN" && isMysql) {
                                 fields += $"'{Convert.ToInt32(collumnValue)}', ";
                             } else if (collumnType == "DATETIME(0)" && isMysql) {

@@ -19,7 +19,7 @@
 
   <ItemGroup>
     <PackageReference Include="DependencyInjectionResolver" Version="1.0.2" />
-    <PackageReference Include="Microsoft.Data.Sqlite" Version="2.0.1" />
+    <PackageReference Include="Microsoft.Data.SQLite" Version="2.0.1" />
     <PackageReference Include="MySql.Data" Version="8.0.11" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="System.Data.Common" Version="4.3.0" />

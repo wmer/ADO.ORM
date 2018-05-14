@@ -68,7 +68,7 @@ namespace ADO.ORM.SqlCreator.SqLite {
                                         required = "NULL";
                                     }
                                 }
-                                if (attr is OnlyInModelAttribute) {
+                                if (attr is IgnoreAttribute) {
                                     notEnter = true;
                                 }
                                 if (attr is PrimaryKeyAttribute) {

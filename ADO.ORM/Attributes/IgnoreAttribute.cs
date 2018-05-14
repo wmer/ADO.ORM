@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ADO.ORM.Attributes {
     [AttributeUsage(AttributeTargets.Property, Inherited = true, AllowMultiple = true)]
-    public class OnlyInModelAttribute : Attribute {
-        public OnlyInModelAttribute() { }
+    public class IgnoreAttribute : Attribute {
+        public IgnoreAttribute() { }
     }
 }
