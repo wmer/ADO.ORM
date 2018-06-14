@@ -13,14 +13,18 @@ namespace ADO.ORM.Converters {
                 var dict = new ConcurrentDictionary<int, ConcurrentDictionary<String, object>>();
                 var dic = new ConcurrentDictionary<String, object>();
                 var indice = 0;
-                while (dataReader.Read()) {
-                    dic = new ConcurrentDictionary<String, object>();
-                    dict[indice] = dic;
-                    for (int i = 0; i < dataReader.FieldCount; i++) {
-                        dic[dataReader.GetName(i)] = dataReader.GetValue(i);
+
+                if (dataReader.HasRows) {
+                    while (dataReader.Read()) {
+                        dic = new ConcurrentDictionary<String, object>();
+                        dict[indice] = dic;
+                        for (int i = 0; i < dataReader.FieldCount; i++) {
+                            dic[dataReader.GetName(i)] = dataReader.GetValue(i);
+                        }
+                        indice++;
                     }
-                    indice++;
                 }
+               
                 return dict;
             }
         }

@@ -34,8 +34,9 @@ namespace ADO.ORM.Core {
             lock (lock2) {
                 var command = CreateQuery(query);
                 var result = command.ExecuteReader();
+                var concurrentDictionary = _dataReaderConverter.Converte(result);
                 _connection.Close();
-                return _dataReaderConverter.Converte(result);
+                return concurrentDictionary;
             }
         }
 

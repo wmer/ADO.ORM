@@ -10,9 +10,9 @@
     <PackageProjectUrl>https://github.com/wmer/ADO.ORM</PackageProjectUrl>
     <RepositoryUrl>https://github.com/wmer/ADO.ORM</RepositoryUrl>
     <PackageTags>ORM MicroORM Sqlite MySql SqlServer</PackageTags>
-    <Version>1.0.2</Version>
-    <AssemblyVersion>1.0.2.0</AssemblyVersion>
-    <FileVersion>1.0.2.0</FileVersion>
+    <Version>1.0.3</Version>
+    <AssemblyVersion>1.0.3.0</AssemblyVersion>
+    <FileVersion>1.0.3.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
