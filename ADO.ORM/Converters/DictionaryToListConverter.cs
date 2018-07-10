@@ -10,7 +10,7 @@ namespace ADO.ORM.Converters {
     internal class DictionaryToListConverter {
         private EntityBuilder _entityBuilder;
 
-        private object lock1 = new object();
+        private readonly object lock1 = new object();
 
         public DictionaryToListConverter(EntityBuilder entityBuilder) {
             _entityBuilder = entityBuilder;

@@ -9,9 +9,9 @@ namespace ADO.ORM.Helpers {
     public abstract class TableHelperBase : ITableHelper {
         protected EntityHelper _entityHelper;
 
-        protected object lock1 = new object();
-        protected object lock2 = new object();
-        protected object lock3 = new object();
+        protected readonly object lock1 = new object();
+        protected readonly object lock2 = new object();
+        protected readonly object lock3 = new object();
 
         public TableHelperBase(EntityHelper entityHelper) {
             _entityHelper = entityHelper;

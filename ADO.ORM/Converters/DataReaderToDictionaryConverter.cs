@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ADO.ORM.Converters {
     public class DataReaderToDictionaryConverter {
-        private object lock1 = new object();
+        private readonly object lock1 = new object();
 
         public ConcurrentDictionary<int, ConcurrentDictionary<String, object>> Converte(DbDataReader dataReader) {
             lock (lock1) {

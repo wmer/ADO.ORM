@@ -17,24 +17,24 @@ namespace ADO.ORM.SqlCreator {
         protected EntityHelper _entityHelper;
         protected PropertyHelper _propertyHelper;
 
-        protected object lock1 = new object();
-        protected object lock2 = new object();
-        protected object lock3 = new object();
-        protected object lock4 = new object();
-        protected object lock5 = new object();
-        protected object lock6 = new object();
-        protected object lock7 = new object();
-        protected object lock8 = new object();
-        protected object lock9 = new object();
-        protected object lock10 = new object();
-        protected object lock11 = new object();
-        protected object lock12 = new object();
-        protected object lock13 = new object();
-        protected object lock14 = new object();
-        protected object lock15 = new object();
-        protected object lock16 = new object();
-        protected object lock17 = new object();
-        protected object lock18 = new object();
+        protected readonly object lock1 = new object();
+        protected readonly object lock2 = new object();
+        protected readonly object lock3 = new object();
+        protected readonly object lock4 = new object();
+        protected readonly object lock5 = new object();
+        protected readonly object lock6 = new object();
+        protected readonly object lock7 = new object();
+        protected readonly object lock8 = new object();
+        protected readonly object lock9 = new object();
+        protected readonly object lock10 = new object();
+        protected readonly object lock11 = new object();
+        protected readonly object lock12 = new object();
+        protected readonly object lock13 = new object();
+        protected readonly object lock14 = new object();
+        protected readonly object lock15 = new object();
+        protected readonly object lock16 = new object();
+        protected readonly object lock17 = new object();
+        protected readonly object lock18 = new object();
 
         public SqlAnsiCreator(ITableHelper tableHelper, EntityHelper entityHelper, PropertyHelper propertyHelper) {
             _tableHelper = tableHelper;

@@ -24,22 +24,22 @@ namespace ADO.ORM {
 
         protected String _sqlString;
 
-        private object lock1 = new object();
-        private object lock2 = new object();
-        private object lock3 = new object();
-        private object lock4 = new object();
-        private object lock5 = new object();
-        private object lock6 = new object();
-        private object lock7 = new object();
-        private object lock10 = new object();
-        private object lock11 = new object();
-        private object lock12 = new object();
-        private object lock13 = new object();
-        private object lock14 = new object();
-        private object lock15 = new object();
-        private object lock16 = new object();
-        private object lock17 = new object();
-        private object lock18 = new object();
+        private readonly object lock1 = new object();
+        private readonly object lock2 = new object();
+        private readonly object lock3 = new object();
+        private readonly object lock4 = new object();
+        private readonly object lock5 = new object();
+        private readonly object lock6 = new object();
+        private readonly object lock7 = new object();
+        private readonly object lock10 = new object();
+        private readonly object lock11 = new object();
+        private readonly object lock12 = new object();
+        private readonly object lock13 = new object();
+        private readonly object lock14 = new object();
+        private readonly object lock15 = new object();
+        private readonly object lock16 = new object();
+        private readonly object lock17 = new object();
+        private readonly object lock18 = new object();
 
         public Repository(
                 DependencyInjection dependencyInjection,

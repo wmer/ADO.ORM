@@ -7,8 +7,8 @@ using System.Text;
 
 namespace ADO.ORM.Helpers {
     public class EntityHelper {
-        private object lock1 = new object();
-        private object lock2 = new object();
+        private readonly object lock1 = new object();
+        private readonly object lock2 = new object();
 
         public PropertyInfo GetPrimaryKey(Type model) {
             lock (lock1) {

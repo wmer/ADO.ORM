@@ -9,15 +9,14 @@ using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace ADO.ORM.Helpers {
-    //source: http://ryanohs.com/2016/04/generating-sql-from-expression-trees-part-2/
     internal class WhereBuilder {
         private ITableHelper _tableHelper;
         private PropertyHelper _propertyHelper;
 
-        private object lock1 = new object();
-        private object lock2 = new object();
-        private object lock3 = new object();
-        private object lock4 = new object();
+        private readonly object lock1 = new object();
+        private readonly object lock2 = new object();
+        private readonly object lock3 = new object();
+        private readonly object lock4 = new object();
 
         public WhereBuilder(ITableHelper tableHelper, PropertyHelper propertyHelper) {
             _tableHelper = tableHelper;
@@ -116,7 +115,6 @@ namespace ADO.ORM.Helpers {
 
         private object GetValue(Expression member) {
             lock (lock3) {
-                // source: http://stackoverflow.com/a/2616980/291955
                 var objectMember = Expression.Convert(member, typeof(object));
                 var getterLambda = Expression.Lambda<Func<object>>(objectMember);
                 var getter = getterLambda.Compile();
@@ -170,53 +168,69 @@ namespace ADO.ORM.Helpers {
     }
 
     internal class WherePart {
+        private readonly static object lock1 = new object();
+        private readonly static object lock2 = new object();
+        private readonly static object lock3 = new object();
+        private readonly static object lock4 = new object();
+        private readonly static object lock5 = new object();
+
         public string Sql { get; set; }
         public Dictionary<string, object> Parameters { get; set; } = new Dictionary<string, object>();
 
         public static WherePart IsSql(string sql) {
-            return new WherePart() {
-                Parameters = new Dictionary<string, object>(),
-                Sql = sql
-            };
+            lock (lock1) {
+                return new WherePart() {
+                    Parameters = new Dictionary<string, object>(),
+                    Sql = sql
+                };
+            }
         }
 
         public static WherePart IsParameter(int count, object value) {
-            return new WherePart() {
-                Parameters = { { count.ToString(), value } },
-                Sql = $"@{count}"
-            };
+            lock (lock2) {
+                return new WherePart() {
+                    Parameters = { { count.ToString(), value } },
+                    Sql = $"@{count}"
+                };
+            }
         }
 
         public static WherePart IsCollection(ref int countStart, IEnumerable values) {
-            var parameters = new Dictionary<string, object>();
-            var sql = new StringBuilder("(");
-            foreach (var value in values) {
-                parameters.Add((countStart).ToString(), value);
-                sql.Append($"@{countStart},");
-                countStart++;
+            lock (lock3) {
+                var parameters = new Dictionary<string, object>();
+                var sql = new StringBuilder("(");
+                foreach (var value in values) {
+                    parameters.Add((countStart).ToString(), value);
+                    sql.Append($"@{countStart},");
+                    countStart++;
+                }
+                if (sql.Length == 1) {
+                    sql.Append("null,");
+                }
+                sql[sql.Length - 1] = ')';
+                return new WherePart() {
+                    Parameters = parameters,
+                    Sql = sql.ToString()
+                };
             }
-            if (sql.Length == 1) {
-                sql.Append("null,");
-            }
-            sql[sql.Length - 1] = ')';
-            return new WherePart() {
-                Parameters = parameters,
-                Sql = sql.ToString()
-            };
         }
 
         public static WherePart Concat(string @operator, WherePart operand) {
-            return new WherePart() {
-                Parameters = operand.Parameters,
-                Sql = $"({@operator} {operand.Sql})"
-            };
+            lock (lock4) {
+                return new WherePart() {
+                    Parameters = operand.Parameters,
+                    Sql = $"({@operator} {operand.Sql})"
+                };
+            }
         }
 
         public static WherePart Concat(WherePart left, string @operator, WherePart right) {
-            return new WherePart() {
-                Parameters = left.Parameters.Union(right.Parameters).ToDictionary(kvp => kvp.Key, kvp => kvp.Value),
-                Sql = $"({left.Sql} {@operator} {right.Sql})"
-            };
+            lock (lock5) {
+                return new WherePart() {
+                    Parameters = left.Parameters.Union(right.Parameters).ToDictionary(kvp => kvp.Key, kvp => kvp.Value),
+                    Sql = $"({left.Sql} {@operator} {right.Sql})"
+                };
+            }
         }
     }
 }

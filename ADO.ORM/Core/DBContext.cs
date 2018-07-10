@@ -14,8 +14,8 @@ namespace ADO.ORM.Core {
         internal ISqlCreator _sqlCreator;
         internal List<Type> _models;
 
-        private object lock1 = new object();
-        private object lock5 = new object();
+        private readonly object lock1 = new object();
+        private readonly object lock5 = new object();
 
         internal void InitializeProperties() {
             lock (lock1) {

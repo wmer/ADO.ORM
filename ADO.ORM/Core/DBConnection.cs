@@ -10,11 +10,11 @@ namespace ADO.ORM.Core {
         private T _connection;
         private DataReaderToDictionaryConverter _dataReaderConverter;
 
-        private object lock1 = new object();
-        private object lock2 = new object();
-        private object lock3 = new object();
-        private object lock4 = new object();
-        private object lock5 = new object();
+        private readonly object lock1 = new object();
+        private readonly object lock2 = new object();
+        private readonly object lock3 = new object();
+        private readonly object lock4 = new object();
+        private readonly object lock5 = new object();
 
         public DBConnection(T connection, DataReaderToDictionaryConverter dataReaderConverter) {
             _connection = connection;

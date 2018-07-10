@@ -8,8 +8,8 @@ namespace ADO.ORM.Helpers {
     public class PropertyHelper {
         private MethodHelper _methodHelper;
 
-        private object lock1 = new object();
-        private object lock2 = new object();
+        private readonly object lock1 = new object();
+        private readonly object lock2 = new object();
 
         public PropertyHelper(MethodHelper methodHelper) {
             _methodHelper = methodHelper;

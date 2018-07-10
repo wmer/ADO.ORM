@@ -7,7 +7,7 @@ namespace ADO.ORM.Builders {
     internal class RepositoryBuilder {
         private DependencyInjection _dependencyInjection;
 
-        private object lock1 = new object();
+        private readonly object lock1 = new object();
 
         public RepositoryBuilder(DependencyInjection dependencyInjection) {
             _dependencyInjection = dependencyInjection;

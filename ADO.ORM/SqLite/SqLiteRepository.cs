@@ -9,8 +9,8 @@ using System.Text;
 
 namespace ADO.ORM.SqLite {
     public class SqLiteRepository<T> : Repository<T> {
-        private object lock8 = new object();
-        private object lock9 = new object();
+        private readonly object lock8 = new object();
+        private readonly object lock9 = new object();
 
         public SqLiteRepository(DependencyInjection dependencyInjection, IDBConnection dBConnection, ISqlCreator sqlCreator, ITableHelper tableHelper) : base(dependencyInjection, dBConnection, sqlCreator, tableHelper) {
         }

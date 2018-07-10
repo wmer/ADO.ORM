@@ -19,8 +19,8 @@ namespace ADO.ORM.Builders {
         private EntityHelper _entityHelper;
         private EntityCache _entityCache;
 
-        private object lock1 = new object();
-        private object lock2 = new object();
+        private readonly object lock1 = new object();
+        private readonly object lock2 = new object();
 
         public EntityBuilder(DependencyInjection classBuilder, PropertyHelper propertyHelper, ITableHelper tableHelper, MethodHelper reflectionOptimizations, RepositoryBuilder repositoryBuilder, EntityHelper entityHelper, EntityCache entityCache) {
             _classBuilder = classBuilder;

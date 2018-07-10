@@ -7,10 +7,10 @@ namespace ADO.ORM.Cache {
     internal class EntityCache {
         private static ConcurrentDictionary<Type, ConcurrentDictionary<object, object>> _entiChache = new ConcurrentDictionary<Type, ConcurrentDictionary<object, object>>();
 
-        private object lock1 = new object();
-        private object lock2 = new object();
-        private object lock3 = new object();
-        private object lock4 = new object();
+        private readonly object lock1 = new object();
+        private readonly object lock2 = new object();
+        private readonly object lock3 = new object();
+        private readonly object lock4 = new object();
 
         public bool ExistInCache<T>(object key) {
             lock (lock1) {
