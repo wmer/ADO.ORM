@@ -58,7 +58,7 @@ namespace ADO.ORM.Helpers {
                             return WherePart.Concat(Recurse(ref i, expression), "=", WherePart.IsParameter(i++, true));
                         }
                         if (getValue) {
-                            var valMember = (MemberExpression)member.Expression;
+                            var valMember = member.Expression;
                             //get value from ConstantExpression
                             var objectMember = Expression.Convert(valMember, typeof(object));
                             var getterLambda = Expression.Lambda<Func<object>>(objectMember);
