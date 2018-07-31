@@ -314,6 +314,8 @@ namespace ADO.ORM.SqlCreator {
                                 values += $"'{Convert.ToBase64String(collumnValue as byte[])}', ";
                             } else if (collumnType == "BOOLEAN" && isMysql) {
                                 values += $"'{Convert.ToInt32(collumnValue)}', ";
+                            } else if (collumnType == "NUMERIC") {
+                                values += $"'{Convert.ToInt32(collumnValue)}', ";
                             } else if (collumnType == "DATETIME(0)" && isMysql) {
                                 values += $"'{((DateTime)collumnValue).ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss")}', ";
                             } else {
@@ -367,9 +369,11 @@ namespace ADO.ORM.SqlCreator {
                             if (collumnType == "BLOB") {
                                 fields += $"'{collumnName}'='{Convert.ToBase64String(collumnValue as byte[])}', ";
                             } else if (collumnType == "BOOLEAN" && isMysql) {
-                                fields += $"'{Convert.ToInt32(collumnValue)}', ";
+                                fields += $"'{collumnName}'='{Convert.ToInt32(collumnValue)}', ";
+                            } else if (collumnType == "NUMERIC") {
+                                fields += $"'{collumnName}'='{Convert.ToInt32(collumnValue)}', ";
                             } else if (collumnType == "DATETIME(0)" && isMysql) {
-                                fields += $"'{((DateTime)collumnValue).ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss")}', ";
+                                fields += $"'{collumnName}'='{((DateTime)collumnValue).ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss")}', ";
                             } else {
                                 fields += $"'{collumnName}'='{collumnValue}', ";
                             }
@@ -410,9 +414,11 @@ namespace ADO.ORM.SqlCreator {
                             if (collumnType == "BLOB") {
                                 fields += $"'{collumnName}'='{Convert.ToBase64String(collumnValue as byte[])}', ";
                             } else if (collumnType == "BOOLEAN" && isMysql) {
-                                fields += $"'{Convert.ToInt32(collumnValue)}', ";
+                                fields += $"'{collumnName}'='{Convert.ToInt32(collumnValue)}', ";
+                            } else if (collumnType == "NUMERIC") {
+                                fields += $"'{collumnName}'='{Convert.ToInt32(collumnValue)}', ";
                             } else if (collumnType == "DATETIME(0)" && isMysql) {
-                                fields += $"'{((DateTime)collumnValue).ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss")}', ";
+                                fields += $"'{collumnName}'='{((DateTime)collumnValue).ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss")}', ";
                             } else {
                                 fields += $"'{collumnName}'='{collumnValue}', ";
                             }
