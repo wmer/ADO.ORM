@@ -314,7 +314,7 @@ namespace ADO.ORM.SqlCreator {
                                 values += $"'{Convert.ToBase64String(collumnValue as byte[])}', ";
                             } else if (collumnType == "BOOLEAN" && isMysql) {
                                 values += $"'{Convert.ToInt32(collumnValue)}', ";
-                            } else if (collumnType == "NUMERIC") {
+                            } else if (collumnType == "NUMERIC" && !(collumnValue is DateTime)) {
                                 values += $"'{Convert.ToInt32(collumnValue)}', ";
                             } else if (collumnType == "DATETIME(0)" && isMysql) {
                                 values += $"'{((DateTime)collumnValue).ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss")}', ";
@@ -370,7 +370,7 @@ namespace ADO.ORM.SqlCreator {
                                 fields += $"'{collumnName}'='{Convert.ToBase64String(collumnValue as byte[])}', ";
                             } else if (collumnType == "BOOLEAN" && isMysql) {
                                 fields += $"'{collumnName}'='{Convert.ToInt32(collumnValue)}', ";
-                            } else if (collumnType == "NUMERIC") {
+                            } else if (collumnType == "NUMERIC" && !(collumnValue is DateTime)) {
                                 fields += $"'{collumnName}'='{Convert.ToInt32(collumnValue)}', ";
                             } else if (collumnType == "DATETIME(0)" && isMysql) {
                                 fields += $"'{collumnName}'='{((DateTime)collumnValue).ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss")}', ";
@@ -415,7 +415,7 @@ namespace ADO.ORM.SqlCreator {
                                 fields += $"'{collumnName}'='{Convert.ToBase64String(collumnValue as byte[])}', ";
                             } else if (collumnType == "BOOLEAN" && isMysql) {
                                 fields += $"'{collumnName}'='{Convert.ToInt32(collumnValue)}', ";
-                            } else if (collumnType == "NUMERIC") {
+                            } else if (collumnType == "NUMERIC" && !(collumnValue is DateTime)) {
                                 fields += $"'{collumnName}'='{Convert.ToInt32(collumnValue)}', ";
                             } else if (collumnType == "DATETIME(0)" && isMysql) {
                                 fields += $"'{collumnName}'='{((DateTime)collumnValue).ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss")}', ";
