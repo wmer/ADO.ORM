@@ -34,6 +34,15 @@ namespace ADO.ORM.Helpers {
                     } catch { }
                 }
 
+                if (property.PropertyType.IsAssignableFrom(typeof(bool))) {
+                    if (parameter is int inte) {
+                        parameter = inte == 1;
+                    }
+                    if (parameter is long lon) {
+                        parameter = lon == 1;
+                    }
+                }
+
                 if (parameter != null) {
                     _methodHelper.CretatePropertySetterMethod(property, instanceClass).DynamicInvoke(Convert.ChangeType(parameter, property.PropertyType));
                 }

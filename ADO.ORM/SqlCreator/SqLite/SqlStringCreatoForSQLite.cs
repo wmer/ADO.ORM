@@ -5,6 +5,7 @@ using ADO.ORM.Helpers.SqLite;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 
@@ -90,6 +91,35 @@ namespace ADO.ORM.SqlCreator.SqLite {
                 }
 
                 return tableSql;
+            }
+        }
+
+        public override string Where<T>(Expression<Func<T, bool>> predicate, string like = "") {
+            lock (lock14) {
+                var sq = new WhereBuilder(_tableHelper, _propertyHelper).ToSql<T>(predicate);
+                var fields = sq.Sql;
+                var i = 0;
+                if (sq.Parameters.Count > 0) {
+                    foreach (var s in fields) {
+                        if (int.TryParse(s.ToString(), out int n)) {
+                            var part = sq.Sql.Substring(0, i);
+                            var prop = part.Substring(part.LastIndexOf('['));
+                            prop = prop.Replace(" = @", "");
+                            prop = prop.Replace(" =", "");
+                            prop = prop.Replace("[", "");
+                            prop = prop.Replace("]", "");
+                            var val = GetObjectValue<T>(prop, sq.Parameters[s.ToString()]);
+                            if (val is bool v) {
+                                val = Convert.ToInt32(v);
+                            }
+                            fields = fields.Replace($"@{s}", $"'{val}'");
+                        }
+                        i++;
+                    }
+                }
+
+                var sqlString = $" WHERE {fields}{((like != "") ? " LIKE '" + like + "'" : "")}";
+                return sqlString;
             }
         }
     }
