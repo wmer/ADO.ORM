@@ -1,15 +1,15 @@
-﻿using DependencyInjectionResolver;
+﻿using ADO.ORM.Core;
+using ADO.ORM.Core.Helpers;
+using ADO.ORM.SQLite.Helpers;
+using DependencyInjectionResolver;
 using Microsoft.Data.Sqlite;
-using ADO.ORM.Contracts;
-using ADO.ORM.Helpers.SqLite;
-using ADO.ORM.SqlCreator.SqLite;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace ADO.ORM.Core.SqLite {
-    public abstract class SqLiteContext : DBContext<SqliteConnection> {
+namespace ADO.ORM.SQLite.Core {
+    public class SqLiteContext : DBContext<SqliteConnection> {
         private readonly object _lock1 = new object();
 
         protected SqLiteContext(string path, String dbName) {
@@ -26,11 +26,11 @@ namespace ADO.ORM.Core.SqLite {
             lock (_lock1) {
                 var conn = new SqliteConnection(conectionString);
                 _dependencyInjection = new DependencyInjection()
-                                        .BindingTypes<ISqlCreator, SqlStringCreatoForSQLite>()
+                                        .BindingTypes<ISqlCreator, SqlStringCreatorHelper>()
                                         .BindingTypes<IDBConnection, DBConnection<SqliteConnection>>()
                                         .BindingTypes<ITableHelper, TableHelper>();
                 _sqlCreator = _dependencyInjection
-                                        .Resolve<SqlStringCreatoForSQLite>();
+                                        .Resolve<SqlStringCreatorHelper>();
                 _dbConnection = _dependencyInjection
                                         .DefineDependency<DBConnection<SqliteConnection>>(0, conn)
                                         .Resolve<DBConnection<SqliteConnection>>();

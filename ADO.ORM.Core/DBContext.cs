@@ -1,27 +1,23 @@
-﻿using DependencyInjectionResolver;
-using ADO.ORM.Contracts;
+﻿using ADO.ORM.Core.Attributes;
+using ADO.ORM.Core.Helpers;
+using DependencyInjectionResolver;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Linq;
 using System.Text;
-using ADO.ORM.Attributes;
 
 namespace ADO.ORM.Core {
     public class DBContext<T> : IDisposable where T : DbConnection {
-        internal DBConnection<T> _dbConnection;
-        internal DependencyInjection _dependencyInjection;
-        internal ISqlCreator _sqlCreator;
-        internal List<Type> _models;
+        protected IDBConnection _dbConnection;
+        protected DependencyInjection _dependencyInjection;
+        protected ISqlCreator _sqlCreator;
+        protected List<Type> _models;
 
         private readonly object lock1 = new object();
-        private readonly object lock2 = new object();
+        private readonly object lock5 = new object();
 
-        public DBContext(string connectionString) {
-
-        }
-
-        internal void InitializeProperties() {
+        protected void InitializeProperties() {
             lock (lock1) {
                 var properties = GetType().GetProperties();
                 foreach (var prop in properties) {
@@ -45,7 +41,7 @@ namespace ADO.ORM.Core {
         }
 
         public void Dispose() {
-            lock (lock2) {
+            lock (lock5) {
                 _dbConnection.Dispose();
             }
         }

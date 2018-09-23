@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ADO.ORM.Attributes {
+namespace ADO.ORM.Core.Attributes {
     [AttributeUsage(AttributeTargets.Property, Inherited = true, AllowMultiple = true)]
     public class CollumnTypeAttributeAttribute : Attribute {
         public String Type { get; set; }

@@ -1,7 +1,7 @@
-﻿using ADO.ORM.Attributes;
-using ADO.ORM.Contracts;
-using ADO.ORM.Enumerators;
-using ADO.ORM.Helpers;
+﻿using ADO.ORM.Core.Attributes;
+using ADO.ORM.Core.Builders;
+using ADO.ORM.Core.Enumerators;
+using ADO.ORM.Core.Helpers;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,11 +11,11 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace ADO.ORM.SqlCreator {
-    public abstract class SqlAnsiCreator : ISqlCreator {
+namespace ADO.ORM.SQLite.Helpers {
+    public class SqlStringCreatorHelper : ISqlCreator {
         protected ITableHelper _tableHelper;
         protected EntityHelper _entityHelper;
-        protected PropertyHelper _propertyHelper; 
+        protected PropertyHelper _propertyHelper;
 
         protected readonly object lock1 = new object();
         protected readonly object lock2 = new object();
@@ -36,7 +36,7 @@ namespace ADO.ORM.SqlCreator {
         protected readonly object lock17 = new object();
         protected readonly object lock18 = new object();
 
-        public SqlAnsiCreator(ITableHelper tableHelper, EntityHelper entityHelper, PropertyHelper propertyHelper) {
+        public SqlStringCreatorHelper(ITableHelper tableHelper, EntityHelper entityHelper, PropertyHelper propertyHelper) {
             _tableHelper = tableHelper;
             _entityHelper = entityHelper;
             _propertyHelper = propertyHelper;
@@ -88,6 +88,14 @@ namespace ADO.ORM.SqlCreator {
                 foreach (var entity in entities) {
                     sql += $"{Insert<T>(entity)};{Environment.NewLine}";
                 }
+                return sql;
+            }
+        }
+
+        public string Insert<T>(T entity, Conflict conflict) {
+            lock (lock6) {
+                String tableName = _tableHelper.GetTableName(entity.GetType());
+                var sql = $"INSERT OR {conflict.ToString()} INTO '{tableName}' {GetToInsert<T>(entity, true)}";
                 return sql;
             }
         }
@@ -232,7 +240,63 @@ namespace ADO.ORM.SqlCreator {
             }
         }
 
-        public abstract string CreateTables(List<Type> models);
+        public string CreateTables(List<Type> models) {
+            lock (lock18) {
+                var tableSql = "";
+                foreach (var table in models) {
+                    var tableName = _tableHelper.GetTableName(table);
+                    var inicio = $"CREATE TABLE IF NOT EXISTS [{tableName}] (";
+                    var collumns = "";
+                    var primaryKey = "";
+
+                    var required = "NULL";
+                    String collumnType = null;
+                    String collumnName = null;
+                    foreach (var property in table.GetProperties(BindingFlags.Public | BindingFlags.Instance)) {
+                        required = "NULL";
+                        var notEnter = false;
+                        collumnType = _tableHelper.GetCollumnType(property);
+                        collumnName = _tableHelper.GetCollumName(property);
+                        var attributes = property.GetCustomAttributes(true);
+
+                        if (typeof(IEnumerable).IsAssignableFrom(property.PropertyType) && !typeof(String).IsAssignableFrom(property.PropertyType) && !(property.PropertyType.IsArray && property.PropertyType.IsAssignableFrom(typeof(byte[])))) {
+                            notEnter = true;
+                        }
+
+                        if (property.GetAccessors()[0].IsVirtual && !property.GetAccessors()[0].IsFinal && !property.PropertyType.IsGenericType) {
+                            collumnName = _tableHelper.GetCollumName(property);
+                            required = "NOT NULL";
+                        }
+
+                        if (attributes.Length > 0) {
+                            foreach (var attr in attributes) {
+                                if (attr is RequiredAttribute requiredAttr) {
+                                    required = requiredAttr.IsRequired ? "NOT NULL" : "NULL";
+                                }
+                                if (attr is IgnoreAttribute) {
+                                    notEnter = true;
+                                }
+                                if (attr is PrimaryKeyAttribute) {
+                                    required = "NOT NULL";
+                                    primaryKey = $"CONSTRAINT[PK_{tableName}] PRIMARY KEY([{collumnName}])";
+                                }
+                            }
+                        }
+
+                        if (!notEnter && !String.IsNullOrEmpty(collumnType)) {
+                            collumns += $"[{collumnName}] {collumnType} {required}, ";
+                        }
+                    }
+
+                    if (String.IsNullOrEmpty(primaryKey)) {
+                        collumns = collumns.Remove((collumns.Length - 2), 2).TrimEnd();
+                    }
+                    tableSql += $"{inicio}{collumns}{primaryKey});{Environment.NewLine}";
+                }
+
+                return tableSql;
+            }
+        }
 
         #region filds helper
 

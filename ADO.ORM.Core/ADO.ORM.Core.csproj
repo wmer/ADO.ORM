@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Description>Simple Micro ORM for SQLite, MySql and SqlServer</Description>
+    <Authors>William Santana</Authors>
+    <Company>William Santana</Company>
+    <PackageLicenseUrl>https://github.com/wmer/ADO.ORM/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/wmer/ADO.ORM</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/wmer/ADO.ORM</RepositoryUrl>
+    <PackageTags>ORM MicroORM</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DependencyInjectionResolver" Version="1.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,24 @@
+﻿using DependencyInjectionResolver;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace ADO.ORM.Core.Builders {
+    internal class RepositoryBuilder {
+        private DependencyInjection _dependencyInjection;
+
+        private readonly object lock1 = new object();
+
+        public RepositoryBuilder(DependencyInjection dependencyInjection) {
+            _dependencyInjection = dependencyInjection;
+        }
+
+        public object Create(Type genericType) {
+            lock (lock1) {
+                var rpositoryType = typeof(Repository<>);
+                var repository = rpositoryType.MakeGenericType(genericType);
+                return _dependencyInjection.Resolve(repository, InstanceOptions.DiferentInstances);
+            }
+        }
+    }
+}
