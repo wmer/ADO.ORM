@@ -9,11 +9,11 @@
     <PackageProjectUrl>https://github.com/wmer/ADO.ORM</PackageProjectUrl>
     <RepositoryUrl>https://github.com/wmer/ADO.ORM</RepositoryUrl>
     <PackageTags>ORM MicroORM</PackageTags>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DependencyInjectionResolver" Version="2.0.0" />
+    <PackageReference Include="DependencyInjectionResolver" Version="2.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
 
