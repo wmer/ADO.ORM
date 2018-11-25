@@ -10,7 +10,7 @@ namespace ADO.ORM.Core {
     public class DBConnection<T> : IDBConnection where T : DbConnection {
         private T _connection;
         private IDataReaderToDictionaryConverter _dataReaderConverter;
-        private Dictionary<string, ConcurrentDictionary<int, ConcurrentDictionary<String, object>>> _cache;
+        private static Dictionary<string, ConcurrentDictionary<int, ConcurrentDictionary<String, object>>> _cache = new Dictionary<string, ConcurrentDictionary<int, ConcurrentDictionary<string, object>>>();
 
 
         private readonly object lock1 = new object();
@@ -30,6 +30,7 @@ namespace ADO.ORM.Core {
                     var command = CreateQuery(query);
                     var ststus = command.ExecuteNonQuery();
                     _connection.Close();
+                    _cache.Clear();
                     DatabseEventHub.OnDatabaseChanged(this, new DatabaseChangedEventArgs(DateTime.Now, query));
                     return ststus;
                 }catch(Exception e){
@@ -65,6 +66,7 @@ namespace ADO.ORM.Core {
                     var command = CreateQuery(query);
                     var result = command.ExecuteScalar();
                     _connection.Close();
+                    _cache.Clear();
                     DatabseEventHub.OnDatabaseChanged(this, new DatabaseChangedEventArgs(DateTime.Now, query));
                     return result;
                 } catch(Exception e) {
