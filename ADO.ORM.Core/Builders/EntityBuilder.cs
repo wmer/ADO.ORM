@@ -36,11 +36,12 @@ namespace ADO.ORM.Core.Builders {
                 var entity = _classBuilder.Resolve<T>(InstanceOptions.DiferentInstances);
                 var properties = entity.GetType().GetProperties();
                 if (_entityHelper.GetPrimaryKey(typeof(T)) is PropertyInfo pkProp) {
-                    if (_entityCache.ExistInCache<T>(dictionary[_tableHelper.GetCollumName(pkProp)])) {
-                        entity = _entityCache.GetInCache<T>(dictionary[_tableHelper.GetCollumName(pkProp)]);
+                    var key = dictionary[_tableHelper.GetCollumName(pkProp)];
+                    if (_entityCache.ExistInCache<T>(key)) {
+                        entity = _entityCache.GetInCache<T>(key);
                     } else {
                         ChangePropertiesValue<T>(ref entity, ref properties, dictionary);
-                        _entityCache.SaveInCache<T>(dictionary[_tableHelper.GetCollumName(pkProp)], entity);
+                        _entityCache.SaveInCache<T>(key, entity);
                     }
                 } else {
                     ChangePropertiesValue<T>(ref entity, ref properties, dictionary);

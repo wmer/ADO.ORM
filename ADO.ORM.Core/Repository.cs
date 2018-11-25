@@ -57,7 +57,6 @@ namespace ADO.ORM.Core {
         public List<T> FindAll() {
             lock (lock1) {
                 var dic = _dBConnection.QueryWithData(_sqlCreatorHelper.Select<T>());
-                _entityCache.CleanCache();
                 return _dictionaryToList.Converte<T>(dic);
             }
         }
@@ -65,7 +64,6 @@ namespace ADO.ORM.Core {
         internal T Find(String wherClausule) {
             lock (lock2) {
                 var dic = _dBConnection.QueryWithData(_sqlCreatorHelper.Select<T>(wherClausule));
-                _entityCache.CleanCache();
                 return _dictionaryToList.Converte<T>(dic).FirstOrDefault();
             }
         }
