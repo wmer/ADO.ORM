@@ -10,6 +10,8 @@ namespace ADO.ORM.Core {
     public class DBConnection<T> : IDBConnection where T : DbConnection {
         private T _connection;
         private IDataReaderToDictionaryConverter _dataReaderConverter;
+        private Dictionary<string, ConcurrentDictionary<int, ConcurrentDictionary<String, object>>> _cache;
+
 
         private readonly object lock1 = new object();
         private readonly object lock2 = new object();
@@ -40,11 +42,16 @@ namespace ADO.ORM.Core {
         public virtual ConcurrentDictionary<int, ConcurrentDictionary<String, object>> QueryWithData(string query) {
             lock (lock2) {
                 try {
-                    var command = CreateQuery(query);
-                    var result = command.ExecuteReader();
-                    var concurrentDictionary = _dataReaderConverter.Converte(result);
-                    _connection.Close();
-                    return concurrentDictionary;
+                    if (_cache.ContainsKey(query)) {
+                        return _cache[query];
+                    }else {
+                        var command = CreateQuery(query);
+                        var result = command.ExecuteReader();
+                        var concurrentDictionary = _dataReaderConverter.Converte(result);
+                        _connection.Close();
+                        _cache[query] = concurrentDictionary;
+                        return concurrentDictionary;
+                    }
                 } catch(Exception e) {
                     DatabseEventHub.OnDatabaseOperationFailed(this, new DatabaseOperationFailedEventArgs(query, e, DateTime.Now));
                     return null;
