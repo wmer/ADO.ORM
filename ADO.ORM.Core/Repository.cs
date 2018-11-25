@@ -97,6 +97,7 @@ namespace ADO.ORM.Core {
             lock (lock6) {
                 var sql = _sqlCreatorHelper.Insert<T>(entity);
                 _dBConnection.ExecuteQueryNonData(sql);
+                _entityCache.CleanCache<T>();
                 return _dBConnection.ExecuteScalar("SELECT last_insert_rowid()");
             }
         }
@@ -105,12 +106,14 @@ namespace ADO.ORM.Core {
             lock (lock7) {
                 var sql = _sqlCreatorHelper.Insert<T>(entities);
                 _dBConnection.ExecuteQueryNonData(sql);
+                _entityCache.CleanCache<T>();
             }
         }
 
         public void Update(T entity) {
             lock (lock10) {
                 _dBConnection.ExecuteQueryNonData(_sqlCreatorHelper.Update<T>(entity));
+                _entityCache.CleanCache<T>();
             }
         }
 
@@ -118,6 +121,7 @@ namespace ADO.ORM.Core {
             lock (lock11) {
                 var sql = _sqlCreatorHelper.Update<T>(entities);
                 _dBConnection.ExecuteQueryNonData(sql);
+                _entityCache.CleanCache<T>();
             }
         }
 
@@ -132,6 +136,7 @@ namespace ADO.ORM.Core {
             lock (lock13) {
                 var sql = _sqlCreatorHelper.Delete<T>(entity);
                 _dBConnection.ExecuteQueryNonData(sql);
+                _entityCache.CleanCache<T>();
             }
         }
 
@@ -164,7 +169,6 @@ namespace ADO.ORM.Core {
             lock (lock17) {
                 if (!String.IsNullOrEmpty(_sqlString)) {
                     var dic = _dBConnection.QueryWithData(_sqlString);
-                    _entityCache.CleanCache();
                     return _dictionaryToList.Converte<T>(dic);
                 }
                 return new List<T>();

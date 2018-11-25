@@ -11,6 +11,7 @@ namespace ADO.ORM.Core.Cache {
         private readonly object lock2 = new object();
         private readonly object lock3 = new object();
         private readonly object lock4 = new object();
+        private readonly object lock5 = new object();
 
         public bool ExistInCache<T>(object key) {
             lock (lock1) {
@@ -49,6 +50,13 @@ namespace ADO.ORM.Core.Cache {
         public void CleanCache() {
             lock (lock4) {
                 _entiChache.Clear();
+            }
+        }
+        public void CleanCache<T>() {
+            lock (lock5) {
+                if (_entiChache.ContainsKey(typeof(T))) {
+                    _entiChache[typeof(T)].Clear();
+                }
             }
         }
     }
