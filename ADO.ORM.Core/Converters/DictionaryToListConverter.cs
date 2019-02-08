@@ -18,10 +18,13 @@ namespace ADO.ORM.Core.Converters {
         public List<T> Converte<T>(ConcurrentDictionary<int, ConcurrentDictionary<String, object>> dictionary) {
             lock (lock1) {
                 var list = new BlockingCollection<T>();
-                foreach (var dic in dictionary) {
-                    T entity = _entityBuilder.Create<T>(dic.Value);
-                    list.Add(entity);
+                if (dictionary != null) {
+                    foreach (var dic in dictionary) {
+                        T entity = _entityBuilder.Create<T>(dic.Value);
+                        list.Add(entity);
+                    }
                 }
+
                 return list.ToList<T>();
             }
         }

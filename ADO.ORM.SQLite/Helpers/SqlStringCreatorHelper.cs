@@ -420,11 +420,14 @@ namespace ADO.ORM.SQLite.Helpers {
                         }
 
                         if (property.GetAccessors()[0].IsVirtual && !property.GetAccessors()[0].IsFinal && !property.PropertyType.IsGenericType) {
-                            if (_entityHelper.GetPrimaryKey(property.PropertyType) is PropertyInfo pkProperty) {
-                                collumnName = _tableHelper.GetCollumName(pkProperty);
-                            } else if (_entityHelper.GetForeignKey(property) is PropertyInfo fkProperty) {
-                                collumnName = _tableHelper.GetCollumName(fkProperty);
-                            }
+                            var pK = _entityHelper.GetPrimaryKey(collumnValue.GetType());
+                            collumnValue = _propertyHelper.GetPropertyValue(collumnValue, pK);
+
+                            //if (_entityHelper.GetPrimaryKey(property.PropertyType) is PropertyInfo pkProperty) {
+                            //    collumnName = _tableHelper.GetCollumName(pkProperty);
+                            //} else if (_entityHelper.GetForeignKey(property) is PropertyInfo fkProperty) {
+                            //    collumnName = _tableHelper.GetCollumName(fkProperty);
+                            //}
                         }
 
                         if (!notEnter) {
@@ -455,12 +458,6 @@ namespace ADO.ORM.SQLite.Helpers {
                     var collumnName = _tableHelper.GetCollumName(property);
                     var collumnType = _tableHelper.GetCollumnType(property);
                     var collumnValue = values[i];
-
-                    if (collumnName == "Id") {
-                        var pK = _entityHelper.GetPrimaryKey(values[i].GetType());
-                        collumnValue = _propertyHelper.GetPropertyValue(values[i], pK);
-                        var ddd = "";
-                    }
                     
                     var notEnter = false;
 
@@ -470,11 +467,14 @@ namespace ADO.ORM.SQLite.Helpers {
                         }
 
                         if (property.GetAccessors()[0].IsVirtual && !property.GetAccessors()[0].IsFinal && !property.PropertyType.IsGenericType) {
-                            if (_entityHelper.GetPrimaryKey(property.PropertyType) is PropertyInfo pkProperty) {
-                                collumnName = _tableHelper.GetCollumName(pkProperty);
-                            } else if (_entityHelper.GetForeignKey(property) is PropertyInfo fkProperty) {
-                                collumnName = _tableHelper.GetCollumName(fkProperty);
-                            }
+                            var pK = _entityHelper.GetPrimaryKey(values[i].GetType());
+                            collumnValue = _propertyHelper.GetPropertyValue(values[i], pK);
+
+                            //if (_entityHelper.GetPrimaryKey(property.PropertyType) is PropertyInfo pkProperty) {
+                            //    collumnName = _tableHelper.GetCollumName(pkProperty);
+                            //} else if (_entityHelper.GetForeignKey(property) is PropertyInfo fkProperty) {
+                            //    collumnName = _tableHelper.GetCollumName(fkProperty);
+                            //}
                         }
 
                         if (!notEnter) {
