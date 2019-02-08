@@ -455,6 +455,13 @@ namespace ADO.ORM.SQLite.Helpers {
                     var collumnName = _tableHelper.GetCollumName(property);
                     var collumnType = _tableHelper.GetCollumnType(property);
                     var collumnValue = values[i];
+
+                    if (collumnName == "Id") {
+                        var pK = _entityHelper.GetPrimaryKey(values[i].GetType());
+                        collumnValue = _propertyHelper.GetPropertyValue(values[i], pK);
+                        var ddd = "";
+                    }
+                    
                     var notEnter = false;
 
                     if (pkProp != property && collumnValue != null) {
