@@ -17,6 +17,9 @@ namespace ADO.ORM.Core.Helpers {
 
         public object GetPropertyValue(object instanceClass, PropertyInfo property) {
             lock (lock1) {
+                if (instanceClass == null) {
+                    return null;
+                }
                 var getMethod = property.GetGetMethod();
                 return _methodHelper.CreatePropertyGetterMethod(property, instanceClass).DynamicInvoke();
             }
@@ -34,7 +37,7 @@ namespace ADO.ORM.Core.Helpers {
                     } catch { }
                 }
 
-                if (parameter != null) {
+                if (instanceClass != null && parameter != null) {
                     _methodHelper.CretatePropertySetterMethod(property, instanceClass).DynamicInvoke(Convert.ChangeType(parameter, property.PropertyType));
                 }
             }
