@@ -14,7 +14,7 @@
   <ItemGroup>
     <PackageReference Include="ADO.ORM.Core" Version="1.0.6" />
     <PackageReference Include="DependencyInjectionResolver" Version="2.0.1" />
-    <PackageReference Include="Microsoft.Data.Sqlite" Version="2.2.2" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="2.2.3" />
   </ItemGroup>
 
   <ItemGroup>
