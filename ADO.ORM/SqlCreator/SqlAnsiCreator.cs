@@ -31,7 +31,7 @@ namespace ADO.ORM.SqlCreator {
 
         public virtual string Select<T>(string whereClausure) {
             return $"{Select<T>()} WHERE {whereClausure}";
-        }
+        } 
 
         public virtual string Select<T>(Expression<Func<T, object>> parameters, bool distincted = false) {
             String tableName = _tableHelper.GetTableName(typeof(T));
