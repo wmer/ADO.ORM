@@ -11,8 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DependencyInjectionResolver
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelpersLibs.Reflection", "..\..\..\..\..\OneDrive - 4C Digital\Projetos\ClassLibraries\Tools\HelpersLibs\HelpersLibs.Reflection\HelpersLibs.Reflection.csproj", "{B7321CC5-776A-4A7A-8152-5D70D17124D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ADO.ORM.Test", "ADO.ORM.Test\ADO.ORM.Test.csproj", "{C1660DBD-AD77-47FD-8EAC-0FEC837710FC}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,10 +29,6 @@ Global
 		{B7321CC5-776A-4A7A-8152-5D70D17124D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7321CC5-776A-4A7A-8152-5D70D17124D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7321CC5-776A-4A7A-8152-5D70D17124D4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C1660DBD-AD77-47FD-8EAC-0FEC837710FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C1660DBD-AD77-47FD-8EAC-0FEC837710FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C1660DBD-AD77-47FD-8EAC-0FEC837710FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C1660DBD-AD77-47FD-8EAC-0FEC837710FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
