@@ -3,7 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.34707.107
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ADO.ORM", "ADO.ORM\ADO.ORM.csproj", "{B30BA85B-3441-4D49-9C6D-C9EA9BCDEC18}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ADO.ORM", "ADO.ORM\ADO.ORM.csproj", "{B30BA85B-3441-4D49-9C6D-C9EA9BCDEC18}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{E719DA7A-2949-4E54-820C-045052439B69}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DependencyInjectionResolver", "..\DependencyInjectionResolver\DependencyInjectionResolver\DependencyInjectionResolver.csproj", "{496FF66C-01A4-434F-986C-7EF0A9632CD3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelpersLibs.Reflection", "..\..\..\..\..\OneDrive - 4C Digital\Projetos\ClassLibraries\Tools\HelpersLibs\HelpersLibs.Reflection\HelpersLibs.Reflection.csproj", "{B7321CC5-776A-4A7A-8152-5D70D17124D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ADO.ORM.Test", "ADO.ORM.Test\ADO.ORM.Test.csproj", "{C1660DBD-AD77-47FD-8EAC-0FEC837710FC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +23,25 @@ Global
 		{B30BA85B-3441-4D49-9C6D-C9EA9BCDEC18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B30BA85B-3441-4D49-9C6D-C9EA9BCDEC18}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B30BA85B-3441-4D49-9C6D-C9EA9BCDEC18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{496FF66C-01A4-434F-986C-7EF0A9632CD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{496FF66C-01A4-434F-986C-7EF0A9632CD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{496FF66C-01A4-434F-986C-7EF0A9632CD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{496FF66C-01A4-434F-986C-7EF0A9632CD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7321CC5-776A-4A7A-8152-5D70D17124D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7321CC5-776A-4A7A-8152-5D70D17124D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7321CC5-776A-4A7A-8152-5D70D17124D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7321CC5-776A-4A7A-8152-5D70D17124D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1660DBD-AD77-47FD-8EAC-0FEC837710FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1660DBD-AD77-47FD-8EAC-0FEC837710FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1660DBD-AD77-47FD-8EAC-0FEC837710FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1660DBD-AD77-47FD-8EAC-0FEC837710FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{496FF66C-01A4-434F-986C-7EF0A9632CD3} = {E719DA7A-2949-4E54-820C-045052439B69}
+		{B7321CC5-776A-4A7A-8152-5D70D17124D4} = {E719DA7A-2949-4E54-820C-045052439B69}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3FF26A74-E50B-41A3-BC6B-7999B43C1C77}
